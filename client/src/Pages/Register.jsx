@@ -28,22 +28,13 @@ const Register = () => {
         toast.success(response.data.message);
         toast("Redirecting to login page");
         nevigate("/login");
-
-        // console.log("User registered successfully:", response.data.message);
       } else {
-        // console.error(response.data.message);
-
         toast.success(response.data.message);
-        // console.log("Registration failed:", response.data.message);
       }
     } catch (error) {
       console.error("Error during async action:", error.message);
       toast.error("An error occurred during the action.");
     }
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Add your registration logic, API calls, etc. here
   };
   return (
     <section className="vh-100" style={{ backgroundColor: "#222" }}>

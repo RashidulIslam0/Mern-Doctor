@@ -6,28 +6,16 @@ import "./App.css";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import { Toaster } from "react-hot-toast";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <Router>
       <div>
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav> */}
         <Toaster position="top-right" />
 
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

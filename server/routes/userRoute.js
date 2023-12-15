@@ -39,13 +39,13 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user in the database by email
-    const user = await User.findOne(email);
+    const user = await User.findOne({ email });
 
     // Check if the user exists
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    const isPasswordValid = await User.findOne(password);
+    const isPasswordValid = await User.findOne({ password });
 
     // Check if the password is valid
     if (!isPasswordValid) {
