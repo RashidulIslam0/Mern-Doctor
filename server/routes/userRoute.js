@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
@@ -45,20 +45,21 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-
-    // Compare the provided password with the hashed password stored in the database
     const isPasswordValid = await User.findOne(password);
 
     // Check if the password is valid
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
+    } else {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+      });
+
+      res
+        .status(200)
+        .json({ message: "Login successful", success: true, data: token });
     }
-
-    // Password is valid, you can now create a session or generate a token for authentication
-
-    res.status(200).json({ message: "Login successful", user });
   } catch (error) {
-    // Handle any errors that occur during login
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
