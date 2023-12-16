@@ -1,4 +1,3 @@
-import Link from "antd/es/typography/Link";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -10,7 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const nevigate = useNavigate();
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,12 +25,13 @@ const Login = () => {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        toast("Redirecting to Home page");
-        localStorage.setItem("token", response.data.data); // Assuming the token is in response.data.data
-        nevigate("/");
+        toast("Redirecting to login page");
+        nevigate("/login");
       } else {
-        toast.error(response.data.message);
+        toast.success(response.data.message);
       }
+
+      console.log("LOgin successful:", response.data);
     } catch (error) {
       console.error("Error during async action:", error.message);
       toast.error("An error occurred during the action.");
